@@ -4,6 +4,8 @@ describe('delegate.js', function() {
     return document.getElementById(id);
   };
 
+  var isLegacy = !document.addEventListener;
+
   var fixtures;
   var buttonSet;
   var inputSet;
@@ -196,6 +198,37 @@ describe('delegate.js', function() {
       email.focus();
       email.blur();
       expect(test).toBe(true);
+    });
+  });
+
+
+  describe('DOM Ready', function() {
+    it('should, if only a function is passed, invoke that function on DOM ready', function() {
+      delegate(function(evt) {
+        if ( (/(on)?readystatechange/).test(evt.type) ) {
+          expect(document.readyState).toBe('complete');
+        }
+        else {
+          expect(evt.type).toBe('DOMContentLoaded');
+        }
+      });
+
+    });
+
+    it('should invoke listeners even if delegate is called after the DOM ready event', function() {
+      //TODO: A better way to test this?
+      delegate(function() {
+        expect(listener01).not.toHaveBeenCalled();
+        delegate(listener01);
+        expect(listener01).toHaveBeenCalled();
+        expect(listener01.calls.length).toBe(1);
+      });
+    });
+
+    it('should use `document` as the context', function() {
+      delegate(function() {
+        expect(this).toBe(document);
+      });
     });
   });
 
