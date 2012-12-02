@@ -9,7 +9,7 @@ Download
 [Development](https://raw.github.com/corymartin/delegate/master/build/delegate.js)
 
 [Production](https://raw.github.com/corymartin/delegate/master/build/delegate.min.js)
-~500 bytes Minified and Gzipped.
+~700 bytes Minified and Gzipped.
 
 
 API
@@ -31,15 +31,36 @@ __Returns__
 ```js
 var tgt = document.getElementById('#somediv');
 delegate(tgt, 'focus', 'input[type=text]', function(evt) {
-  // ....
+  // `this` and `evt.target` are the focused text input
 });
 ```
+
 ```js
 var btn = document.getElementById('#somebtn');
 var remove = delegate(btn, 'click', function(evt) {
-  // ....
+  // `this` and `evt.target` are `#somebtn`
 });
 
 // Remove listener
 remove();
 ```
+
+If only a listener is passed, it will be invoked on DOM ready.
+
+```js
+delegate(function() {
+  // DOM is loaded
+});
+```
+
+
+<a name="noConflict"></a>
+### delegate.noConflict()
+
+```js
+var mydelegate = delegate.noConflict();
+
+// Former `delegate` has now been restored.
+```
+
+
