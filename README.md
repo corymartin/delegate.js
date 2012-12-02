@@ -19,14 +19,14 @@ API
 
 __Parameters__
 
-- __*target*__ `element|document|window` Parent to delegate events.
-- __*eventType*__ `string` Event type, e.g. `'click'`, `'blur'`, etc.
-- __*selector*__ `string` *Optional.* Selector to filter elements that trigger event.
+- __*target*__ `Element|document|window` Parent to delegate events.
+- __*eventType*__ `String` Event type, e.g. `'click'`, `'blur'`, etc.
+- __*selector*__ `String` *Optional.* Selector to filter elements that trigger event.
   If not passed or is `null` or `undefined`, the event is triggered on the target.
-- __*listener*__ `function` Function to invoke when event is triggered.
+- __*listener*__ `Function` Function to invoke when event is triggered.
 
 __Returns__
-`function` Function to remove the event.
+`Function` Function to remove the event.
 
 ```js
 var tgt = document.getElementById('#somediv');
