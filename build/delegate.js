@@ -1,7 +1,7 @@
 /*!
  * @preserve
  * Delegate.js
- * v0.2.2
+ * v0.2.3
  * Utility to delegate DOM events (>= IE8)
  * https://github.com/corymartin/delegate
  * Copyright (c) 2012 Cory Martin
@@ -50,6 +50,7 @@
 
 
   var matches = (function() {
+    if (!window.Element) return;
     var fns = [
         'oMatchesSelector'
       , 'msMatchesSelector'
@@ -61,7 +62,6 @@
     for (var i = fns.length; i--;) {
       if (fns[i] in Element.prototype) return fns[i];
     }
-    return null;
   })();
 
 
@@ -82,11 +82,14 @@
   };
 
 
-  var conformEvent = function(evt) {
-    if (isLegacy) {
-      evt = window.event;
-      evt.target = evt.srcElement;
+  var createEvent = function(origEvt) {
+    if (isLegacy) origEvt = window.event;
+    var evt = {};
+    for (var key in origEvt) {
+      evt[key] = origEvt[key];
     }
+    evt.target = evt.srcElement = evt.target || origEvt.srcElement;
+    return evt;
   };
 
 
@@ -142,7 +145,7 @@
     }
 
     var listenerProxy = function(evt) {
-      conformEvent(evt);
+      evt = createEvent(evt);
       if (doCancelReadyState(evt)) return;
       listenerBody(evt, target, selector, listener);
       // Remove DOM ready listener
@@ -150,16 +153,16 @@
     };
 
     var remove = function() {
-      target[removeEvtMethod](evtType, listenerProxy, true);
+      target[removeEvtMethod](evtType, listenerProxy, !!selector);
     };
 
-    target[addEvtMethod](evtType, listenerProxy, true);
+    target[addEvtMethod](evtType, listenerProxy, !!selector);
 
     return remove;
   };
 
 
-  delegate.VERSION = '0.2.2';
+  delegate.VERSION = '0.2.3';
 
 
   /*
