@@ -40,12 +40,14 @@ describe('delegate.js', function() {
 
   afterEach(function() {
     // Clear events
-    /*
+    // Hack for IE8 issue: cloneNode(true) alone was not working.
+    var div = document.createElement('div');
+    div.id = 'fixtures';
+    div.innerHTML = fixtures.cloneNode(true).innerHTML;
     document.body.replaceChild(
-        fixtures.cloneNode(true)
+        div
       , fixtures
     );
-    */
   });
 
 
@@ -202,6 +204,21 @@ describe('delegate.js', function() {
   });
 
 
+  describe('event object', function() {
+    it('should have both `target` and `srcElement` properties', function() {
+      var test = false;
+      delegate(buttonSet, 'click', '.btn', function(evt) {
+        expect(evt.target).toBeDefined();
+        expect(evt.srcElement).toBeDefined();
+        expect(evt.target).toBe(evt.srcElement);
+        test = true;
+      });
+      btnOne.click();
+      expect(test).toBe(true);
+    });
+  });
+
+
   describe('DOM Ready', function() {
     it('should, if only a function is passed, invoke that function on DOM ready', function() {
       delegate(function(evt) {
@@ -212,7 +229,6 @@ describe('delegate.js', function() {
           expect(evt.type).toBe('DOMContentLoaded');
         }
       });
-
     });
 
     it('should invoke listeners even if delegate is called after the DOM ready event', function() {
