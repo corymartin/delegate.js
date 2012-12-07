@@ -1,7 +1,7 @@
 /*!
  * @preserve
  * Delegate.js
- * v0.2.3
+ * v0.2.4
  * Utility to delegate DOM events (>= IE8)
  * https://github.com/corymartin/delegate
  * Copyright (c) 2012 Cory Martin
@@ -19,9 +19,7 @@
   var addEvtMethod    = isLegacy ? 'attachEvent' : 'addEventListener';
   var removeEvtMethod = isLegacy ? 'detachEvent' : 'removeEventListener';
 
-  var domLoadEvt = isLegacy
-    ? (isLegacy ? 'on' : '') + 'readystatechange'
-    : 'DOMContentLoaded';
+  var domLoadEvt = isLegacy ? 'onreadystatechange' : 'DOMContentLoaded';
 
 
   // Firefox has not yet implemented focusin/focusout
@@ -40,9 +38,9 @@
     anchorEl.href = '#';
     document.body.appendChild(anchorEl);
     anchorEl[addEvtMethod](
-        isLegacy ? 'onfocusin' : 'focusin'
-      , function(){ isFocusinSupported = true; }
-      , false
+      isLegacy ? 'onfocusin' : 'focusin'
+    , function(){ isFocusinSupported = true; }
+    , false
     );
     anchorEl.focus();
     document.body.removeChild(anchorEl);
@@ -52,12 +50,12 @@
   var matches = (function() {
     if (!window.Element) return;
     var fns = [
-        'oMatchesSelector'
-      , 'msMatchesSelector'
-      , 'mozMatchesSelector'
-      , 'webkitMatchesSelector'
-      , 'matchesSelector'
-      , 'matches'
+      'oMatchesSelector'
+    , 'msMatchesSelector'
+    , 'mozMatchesSelector'
+    , 'webkitMatchesSelector'
+    , 'matchesSelector'
+    , 'matches'
     ];
     for (var i = fns.length; i--;) {
       if (fns[i] in Element.prototype) return fns[i];
@@ -162,7 +160,7 @@
   };
 
 
-  delegate.VERSION = '0.2.3';
+  delegate.VERSION = '0.2.4';
 
 
   /*
