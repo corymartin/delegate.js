@@ -1,0 +1,10 @@
+{
+  "name": "delegate.js",
+  "version": "0.2.5",
+  "author": "Cory Martin",
+  "description": "Utility to delegate DOM events (>= IE8)",
+  "main": "index.js",
+  "devDependencies": {
+    "uglify-js": "2.2.x"
+  }
+}

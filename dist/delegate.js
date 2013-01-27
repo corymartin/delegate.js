@@ -1,13 +1,12 @@
 /*!
  * @preserve
  * Delegate.js
- * v0.2.4
  * Utility to delegate DOM events (>= IE8)
  * https://github.com/corymartin/delegate
  * Copyright (c) 2012 Cory Martin
  * Distributed under the MIT License
  */
-!function(window, undefined) {
+! function(window, undefined) {
   'use strict';
 
   var document = window.document;
@@ -48,7 +47,7 @@
 
 
   var matches = (function() {
-    if (!window.Element) return;
+    if (! window.Element) return;
     var fns = [
       'oMatchesSelector'
     , 'msMatchesSelector'
@@ -92,7 +91,7 @@
 
 
   var listenerBody = function(evt, target, selector, listener) {
-    if (!selector) {
+    if (! selector) {
       listener.call(target, evt);
       return;
     }
@@ -160,13 +159,29 @@
   };
 
 
-  delegate.VERSION = '0.2.4';
+  delegate.VERSION = '0.2.5';
 
 
   /*
    * Export
    */
-  window.delegate = delegate;
+  // CommonJS/Node.js
+  if (typeof exports !== 'undefined') {
+    if (typeof module !== 'undefined' && module.exports) {
+      exports = module.exports = delegate;
+    }
+    exports.delegate = delegate;
+  }
+  // AMD/Require.js
+  else if (typeof define === 'function' && define.amd) {
+    define(function() {
+      return delegate;
+    });
+  }
+  // Browser
+  else {
+    window.delegate = delegate;
+  }
 
 
   /**
