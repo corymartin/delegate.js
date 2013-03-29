@@ -29,14 +29,14 @@ __Returns__
 `Function` Function to remove the event.
 
 ```js
-var tgt = document.getElementById('#somediv');
+var tgt = document.getElementById('somediv');
 delegate(tgt, 'focus', 'input[type=text]', function(evt) {
   // `this` and `evt.target` are the focused text input
 });
 ```
 
 ```js
-var btn = document.getElementById('#somebtn');
+var btn = document.getElementById('somebtn');
 var remove = delegate(btn, 'click', function(evt) {
   // `this` and `evt.target` are `#somebtn`
 });
