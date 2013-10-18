@@ -6,9 +6,9 @@ Utility to delegate DOM events (>= IE8)
 
 Download
 --------
-[Development](https://raw.github.com/corymartin/delegate.js/0.2.5/dist/delegate.js)
+[Development](https://raw.github.com/corymartin/delegate.js/0.2.6/dist/delegate.js)
 
-[Production](https://raw.github.com/corymartin/delegate.js/0.2.5/dist/delegate.min.js)
+[Production](https://raw.github.com/corymartin/delegate.js/0.2.6/dist/delegate.min.js)
 ~700 bytes Minified and Gzipped.
 
 
