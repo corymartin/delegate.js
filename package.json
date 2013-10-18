@@ -1,10 +1,15 @@
 {
   "name": "delegate.js",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "author": "Cory Martin",
   "description": "Utility to delegate DOM events (>= IE8)",
+  "homepage": "https://github.com/corymartin/delegate.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:corymartin/delegate.js.git"
+  },
   "main": "index.js",
   "devDependencies": {
-    "uglify-js": "2.2.x"
+    "uglify-js": "2.3.x"
   }
 }

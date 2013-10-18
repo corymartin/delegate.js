@@ -1,9 +1,9 @@
 /*!
  * @preserve
- * Delegate.js
+ * delegate.js
  * Utility to delegate DOM events (>= IE8)
- * https://github.com/corymartin/delegate
- * Copyright (c) 2012 Cory Martin
+ * https://github.com/corymartin/delegate.js
+ * Copyright (c) 2013 Cory Martin
  * Distributed under the MIT License
  */
 ! function(window, undefined) {
@@ -74,8 +74,8 @@
 
 
   var doCancelReadyState = function(evt) {
-    return document.readyState !== 'complete'
-      && (/(on)?readystatechange/).test(evt.type);
+    return /in/.test(document.readyState) // readyState == 'loading' or 'interactive'
+      && /(on)?readystatechange/.test(evt.type);
   };
 
 
@@ -159,7 +159,7 @@
   };
 
 
-  delegate.VERSION = '0.2.5';
+  delegate.VERSION = '0.2.6';
 
 
   /*
